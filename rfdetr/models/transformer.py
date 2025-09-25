@@ -219,7 +219,7 @@ class Transformer(nn.Module):
             mask_flatten = torch.cat(mask_flatten, 1)   # bs, \sum{hxw}
             valid_ratios = torch.stack([self.get_valid_ratio(m) for m in masks], 1)
         lvl_pos_embed_flatten = torch.cat(lvl_pos_embed_flatten, 1) # bs, \sum{hxw}, c 
-        spatial_shapes = torch.as_tensor(spatial_shapes, dtype=torch.long, device=memory.device)
+        
         level_start_index = torch.cat((spatial_shapes.new_zeros((1, )), spatial_shapes.prod(1).cumsum(0)[:-1]))
         
         if self.two_stage:
